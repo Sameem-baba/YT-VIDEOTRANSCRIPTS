@@ -20,9 +20,15 @@ importers:
       '@langchain/core':
         specifier: ^0.3.36
         version: 0.3.36(openai@4.80.1(zod@3.24.1))
+      '@langchain/google-genai':
+        specifier: ^0.1.6
+        version: 0.1.6(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))(zod@3.24.1)
       '@langchain/langgraph':
         specifier: ^0.2.41
         version: 0.2.41(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))
+      '@radix-ui/react-avatar':
+        specifier: ^1.1.2
+        version: 1.1.2(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@radix-ui/react-icons':
         specifier: ^1.3.2
         version: 1.3.2(react@19.0.0)
@@ -43,7 +49,7 @@ importers:
         version: 1.18.2(@clerk/clerk-react@5.22.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       langchain:
         specifier: ^0.3.13
-        version: 0.3.13(@langchain/anthropic@0.3.12(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1))))(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))(openai@4.80.1(zod@3.24.1))
+        version: 0.3.13(@langchain/anthropic@0.3.12(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1))))(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))(@langchain/google-genai@0.1.6(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))(zod@3.24.1))(openai@4.80.1(zod@3.24.1))
       lucide-react:
         specifier: ^0.474.0
         version: 0.474.0(react@19.0.0)
@@ -343,6 +349,10 @@ packages:
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
 
+  '@google/generative-ai@0.21.0':
+    resolution: {integrity: sha512-7XhUbtnlkSEZK15kN3t+tzIMxsbKm/dSkKBFalj+20NvPKe1kBY7mR2P7vuijEn+f06z5+A8bVGKO0v39cr6Wg==}
+    engines: {node: '>=18.0.0'}
+
   '@graphql-typed-document-node/core@3.2.0':
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
     peerDependencies:
@@ -504,6 +514,12 @@ packages:
   '@langchain/core@0.3.36':
     resolution: {integrity: sha512-lOS6f5o2MarjGPomHPhzde9xI3lZW2NIOEdCv0dvjb1ZChWhwXWHtAMHSZmuSB53ySzDWAMkimimHd+Yqz5MwQ==}
     engines: {node: '>=18'}
+
+  '@langchain/google-genai@0.1.6':
+    resolution: {integrity: sha512-LF3fan9pvgFa1vw2/IYGhi5KjppE0OvPFX3QQBUshBLpXWERP+BSpSD7jcXyqm9Kf7DcFj7w5/2knKeEwih8Xg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@langchain/core': '>=0.3.17 <0.4.0'
 
   '@langchain/langgraph-checkpoint@0.0.13':
     resolution: {integrity: sha512-amdmBcNT8a9xP2VwcEWxqArng4gtRDcnVyVI4DsQIo1Aaz8e8+hH17zSwrUF3pt1pIYztngIfYnBOim31mtKMg==}
@@ -3280,6 +3296,8 @@ snapshots:
 
   '@floating-ui/utils@0.2.9': {}
 
+  '@google/generative-ai@0.21.0': {}
+
   '@graphql-typed-document-node/core@3.2.0(graphql@16.10.0)':
     dependencies:
       graphql: 16.10.0
@@ -3424,6 +3442,14 @@ snapshots:
       zod-to-json-schema: 3.24.1(zod@3.24.1)
     transitivePeerDependencies:
       - openai
+
+  '@langchain/google-genai@0.1.6(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))(zod@3.24.1)':
+    dependencies:
+      '@google/generative-ai': 0.21.0
+      '@langchain/core': 0.3.36(openai@4.80.1(zod@3.24.1))
+      zod-to-json-schema: 3.24.1(zod@3.24.1)
+    transitivePeerDependencies:
+      - zod
 
   '@langchain/langgraph-checkpoint@0.0.13(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))':
     dependencies:
@@ -5390,7 +5416,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  langchain@0.3.13(@langchain/anthropic@0.3.12(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1))))(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))(openai@4.80.1(zod@3.24.1)):
+  langchain@0.3.13(@langchain/anthropic@0.3.12(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1))))(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))(@langchain/google-genai@0.1.6(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))(zod@3.24.1))(openai@4.80.1(zod@3.24.1)):
     dependencies:
       '@langchain/core': 0.3.36(openai@4.80.1(zod@3.24.1))
       '@langchain/openai': 0.4.2(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))
@@ -5407,6 +5433,7 @@ snapshots:
       zod-to-json-schema: 3.24.1(zod@3.24.1)
     optionalDependencies:
       '@langchain/anthropic': 0.3.12(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))
+      '@langchain/google-genai': 0.1.6(@langchain/core@0.3.36(openai@4.80.1(zod@3.24.1)))(zod@3.24.1)
     transitivePeerDependencies:
       - encoding
       - openai

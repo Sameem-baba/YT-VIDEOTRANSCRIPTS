@@ -13,6 +13,7 @@ import SYSTEM_MESSAGE from "@/constants/systemMessage";
 import {
 	AIMessage,
 	BaseMessage,
+	HumanMessage,
 	SystemMessage,
 	trimMessages,
 } from "@langchain/core/messages";
@@ -113,7 +114,36 @@ const createWorkflow = () => {
 	return stateGraph;
 };
 
-function addCachingHeaders(messages: BaseMessage[]) {}
+function addCachingHeaders(messages: BaseMessage[]) {
+	if (!messages.length) return messages;
+
+	const cachedMessages = [...messages];
+
+	const addCache = (message: BaseMessage) => {
+		message.content = [
+			{
+				type: "text",
+				text: message.content as string,
+				cache_control: { type: "ephemeral" },
+			},
+		];
+	};
+
+	addCache(cachedMessages.at(-1)!);
+
+	let humanCount = 0;
+	for (let i = cachedMessages.length - 1; i >= 0; i--) {
+		if (cachedMessages[i] instanceof HumanMessage) {
+			humanCount++;
+			if (humanCount === 2) {
+				addCache(cachedMessages[i]);
+				break;
+			}
+		}
+	}
+
+	return cachedMessages;
+}
 
 export async function submitQuestion(messages: BaseMessage[], chatId: string) {
 	const cachedMessages = addCachingHeaders(messages);
