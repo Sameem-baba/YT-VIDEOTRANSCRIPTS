@@ -146,7 +146,7 @@ function addCachingHeaders(messages: BaseMessage[]) {
 }
 
 export async function submitQuestion(messages: BaseMessage[], chatId: string) {
-	const cachedMessages = addCachingHeaders(messages);
+	// const cachedMessages = addCachingHeaders(messages);
 	const workflow = createWorkflow();
 
 	const checkpointer = new MemorySaver();
