@@ -26,6 +26,7 @@ export const createSSEParser = () => {
 						? parsed
 						: null;
 				} catch (error) {
+					console.log(error)
 					return {
 						type: StreamMessageType.Error,
 						error: "Failed to parse SSE message",
